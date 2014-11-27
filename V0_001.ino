@@ -1,12 +1,12 @@
 #include <LiquidCrystal.h>
 
-int sensorvalue = 0;          // variable for reading the IR sensor status
+int sensorValue = 0;          // variable for reading the IR sensor status
 int triggerState = 0;         // variable for reading the pushbutton status
 
 int health = 100;             // variable for user health
 
-int trigger = 0;              // variable for delaying the trigger
-int hit = 0;              // variable for delaying the possibility to get hit
+int triggerDelay = 0;              // variable for delaying the trigger
+int hitDelay = 0;              // variable for delaying the possibility to get hit
 int countdown = 0;            // variable for countdown when dead
 
 
@@ -36,7 +36,7 @@ void setup() {
 
 // MAIN LOOP
 void loop() {
- sensorvalue =analogRead(sensorPin);       // read the state of the sensor value:
+ sensorValue =analogRead(sensorPin);       // read the state of the sensor value:
  triggerState = analogRead(buttonPin);     // read the state of the pushbutton value
 
  // set the cursor to column 0, line 0
@@ -44,8 +44,8 @@ void loop() {
  lcd.setCursor(0, 0);
 
  // When hit
- if ((sensorvalue < 15) && (hit < 3)) { hit = 10; health= health-20;}  // if hit and if hit delay is lower than 3, hit delay will be 10 and health will drop with 20
- if (hit > 1) {lcd.print("you're hit!"); hit = hit - 1;}        // print geraakt
+ if ((sensorValue < 15) && (hitDelay < 3)) { hitDelay = 10; health= health-20;}  // if hit and if hit delay is lower than 3, hit delay will be 10 and health will drop with 20
+ if (hitDelay > 1) {lcd.print("you're hit!"); hitDelay = hitDelay - 1;}        // print geraakt
 
 // when dead
  if (health <= 0) {countdown = 20;}               // countdown naar 30 seconden
@@ -63,9 +63,9 @@ void loop() {
 }
 
 //schieten:
- if ((triggerState >= 1023) && (trigger <= 0)) // check if the pushbutton is pressed and if the trigger delay is finished
-    {digitalWrite(ledPin, HIGH); trigger = 15;}  // turn LED on and set trigger delay to 5
- if (trigger > 0) {trigger = trigger - 1;}     // if trigger delay is bigger than 0  reduce the trigger delay by 1
+ if ((triggerState >= 1023) && (triggerDelay <= 0)) // check if the pushbutton is pressed and if the trigger delay is finished
+    {digitalWrite(ledPin, HIGH); triggerDelay = 15;}  // turn LED on and set trigger delay to 5
+ if (triggerDelay > 0) {triggerDelay = triggerDelay - 1;}     // if trigger delay is bigger than 0  reduce the trigger delay by 1
 
 
 
