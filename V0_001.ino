@@ -44,11 +44,11 @@ void loop() {
  lcd.setCursor(0, 0);
 
  // When hit
- if ((sensorValue < 15) && (hitDelay < 3)) { hitDelay = 10; health= health-20;}  // if hit and if hit delay is lower than 3, hit delay will be 10 and health will drop with 20
+ if ((sensorValue < 15) && (hitDelay < 3)) { hitDelay = 50; health= health-20;}  // if hit and if hit delay is lower than 3, hit delay will be 10 and health will drop with 20
  if (hitDelay > 1) {lcd.print("you're hit!"); hitDelay = hitDelay - 1;}        // print geraakt
 
 // when dead
- if (health <= 0) {countdown = 20;}               // countdown naar 30 seconden
+ if (health <= 0) {countdown = 15;}               // countdown naar 30 seconden
  while (health <= 0)                              // loop while health is lower or equal to 0
  {
   lcd.clear();                                        // clear LCD
@@ -64,7 +64,7 @@ void loop() {
 
 //schieten:
  if ((triggerState >= 1023) && (triggerDelay <= 0)) // check if the pushbutton is pressed and if the trigger delay is finished
-    {digitalWrite(ledPin, HIGH); triggerDelay = 15;}  // turn LED on and set trigger delay to 5
+    {digitalWrite(ledPin, HIGH); triggerDelay = 25;}  // turn LED on and set trigger delay to 5
  if (triggerDelay > 0) {triggerDelay = triggerDelay - 1;}     // if trigger delay is bigger than 0  reduce the trigger delay by 1
 
 
@@ -78,7 +78,7 @@ void loop() {
  lcd.print(triggerState);
 
 
-delay(100);   //  vertraging;
+delay(10);   //  vertraging;
 
 lcd.clear();   // clear the lcd
 digitalWrite(ledPin, LOW);   // turn LED off
