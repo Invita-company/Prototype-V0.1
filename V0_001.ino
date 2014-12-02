@@ -1,13 +1,13 @@
 #include <LiquidCrystal.h>
-#include "pitches.h"
+#define NOTE_DS8 4978
 
 // notes in the melody:
 int melody[] = {
-  NOTE_DS8, NOTE_DS8,NOTE_DS8, NOTE_DS8, NOTE_DS8,0, NOTE_DS8, NOTE_DS8};
+  NOTE_DS8, NOTE_DS8,NOTE_DS8, NOTE_DS8, NOTE_DS8,NOTE_DS8, NOTE_DS8, NOTE_DS8};
 
 // note durations: 4 = quarter note, 8 = eighth note, etc.:
 int noteDurations[] = {
-  4, 8, 8, 4,4,4,4,4 };
+  12, 8, 12, 8,12,8,12,8 };
 
 int sensorValue = 0;          // variable for reading the IR sensor status
 int triggerState = 0;         // variable for reading the pushbutton status
@@ -62,7 +62,7 @@ void loop() {
     lcd.print("you're hit!"); hitDelay = hitDelay - 1;}        // print geraakt
 
   // when dead
-  if (health <= 0) {countdown = 15; // countdown naar 30 seconden
+  if (health <= 0) {countdown = 10; // countdown naar 30 seconden
       // iterate over the notes of the melody:
       for (int thisNote = 0; thisNote < 8; thisNote++) {
 
